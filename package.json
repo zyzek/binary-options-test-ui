@@ -68,9 +68,15 @@
     "webpack-pwa-manifest": "^3.6.2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "@material-ui/core": "^3.1.1",
     "@material-ui/icons": "^3.0.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "fontawesome": "^5.6.3",
     "keymirror": "^0.1.1",
+    "material-ui": "^0.20.2",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dnd": "^6.0.0",
@@ -81,10 +87,12 @@
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.88.2",
     "sha256": "^0.2.0",
     "truffle-contract": "^3.0.6",
     "validator": "^10.9.0",
     "web3": "0.20.6",
+    "web3-utils": "^1.2.9",
     "webpack-dev-server": "^3.2.1"
   },
   "husky": {

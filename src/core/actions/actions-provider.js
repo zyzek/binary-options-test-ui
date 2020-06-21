@@ -13,6 +13,19 @@ function dispatchProvider(dispatch) {
   })())
 }
 
+
+export function getProvider() {
+  return async (dispatch, getState) => {
+    const { web3Provider } = getState().provider
+
+    return web3Provider
+  }
+}
+
+export function providerIsSet() {
+  return Boolean(window.ethereum)
+}
+
 export function setProvider() {
   return (dispatch) => {
     if (window.ethereum) {
