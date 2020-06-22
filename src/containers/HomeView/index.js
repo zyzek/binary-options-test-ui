@@ -349,14 +349,14 @@ class HomeView extends Component {
   fetchActiveMarkets = async () => {
     const { actions } = this.props
     this.setState({
-      markets: await actions.market.getActiveMarkets()
+      markets: await actions.market.getMarkets()
     })
   }
 
   fetchMaturedMarkets = async () => {
     const { actions } = this.props
     this.setState({
-      markets: await actions.market.getMaturedMarkets()
+      markets: await actions.market.getMarkets(true)
     })
   }
 

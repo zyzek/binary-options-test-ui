@@ -203,7 +203,7 @@ export function refund(marketAddress, short, value) {
   }
 }
 
-export function getActiveMarkets(matured = false) {
+export function getMarkets(matured = false) {
   return async (dispatch, getState) => {
     const { web3Provider } = getState().provider
     const ManagerContractConstructor = contract(BinaryOptionMarketManager)
