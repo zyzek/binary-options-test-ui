@@ -366,6 +366,7 @@ class HomeView extends Component {
       phase: market.phase,
       strikePrice: formatPrice(market.strikePrice),
       currency: market.currency,
+      prices: market.prices,
       times: {
         biddingEnd: market.biddingEnd.toLocaleString(),
         maturity: market.maturity.toLocaleString(),
@@ -493,7 +494,7 @@ class HomeView extends Component {
                   { markets.map(m =>
                     (<ListItem button key={m.address} onClick={() => this.handleMarketClick(m)}>
                       <ListItemText>
-                        {m.phase === 'Bidding' ? <PlayArrowIcon /> : <LoopIcon />} {m.phase}: {m.currency} &gt; {formatPrice(m.strikePrice)} @ {m.maturity.toLocaleDateString()}
+                        {m.phase === 'Bidding' ? <PlayArrowIcon /> : <LoopIcon />} {m.phase}: {m.currency} &gt; ${formatPrice(m.strikePrice)} @ {m.maturity.toLocaleDateString()} - (${formatPrice(m.prices.long)} / ${formatPrice(m.prices.short)})
                       </ListItemText>
                      </ListItem>)) }
                   { markets.length === 0 && <ListItem>No markets!</ListItem> }

@@ -220,6 +220,7 @@ export function getMarkets(matured = false) {
       const market = BOMContractConstructor.at(m)
       const oracleDetails = await market.oracleDetails()
       const times = await market.times()
+      const prices = await market.prices()
       const phase = mapPhaseString((await market.phase()).toString())
 
       return {
@@ -229,7 +230,11 @@ export function getMarkets(matured = false) {
         phase,
         biddingEnd: new Date(parseInt(times[0].toString(10)) * 1000),
         maturity: new Date(parseInt(times[1].toString(10)) * 1000),
-        expiry: new Date(parseInt(times[2].toString(10)) * 1000)
+        expiry: new Date(parseInt(times[2].toString(10)) * 1000),
+        prices: {
+          long: Web3Utils.fromWei(prices[0].toString(10)),
+          short: Web3Utils.fromWei(prices[1].toString(10))
+        }
       }
     })
 
