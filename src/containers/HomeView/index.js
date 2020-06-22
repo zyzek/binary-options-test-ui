@@ -607,7 +607,7 @@ class HomeView extends Component {
         <br />
 
         <div><Header as="h2">Binary Option Market</Header> <Header as="h5">{address}</Header></div>
-        <div><Header as="h3">{currency} &gt; ${strikePrice} @ {times.maturity.toLocaleString()} (L: ${prices.long} / S: ${prices.short})</Header></div>
+        <div><Header as="h3">{currency} &gt; ${strikePrice} @ {times.maturity.toLocaleString()} (L: ${formatPrice(prices.long)} / S: ${formatPrice(prices.short)})</Header></div>
         <br />
         <div>
           <Grid container spacing={32}>
