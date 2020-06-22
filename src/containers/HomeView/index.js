@@ -24,6 +24,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import LoopIcon from '@material-ui/icons/Loop'
+import StopIcon from '@material-ui/icons/Stop'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 
@@ -494,7 +495,7 @@ class HomeView extends Component {
                   { markets.map(m =>
                     (<ListItem button key={m.address} onClick={() => this.handleMarketClick(m)}>
                       <ListItemText>
-                        {m.phase === 'Bidding' ? <PlayArrowIcon /> : <LoopIcon />} {m.phase}: {m.currency} &gt; ${formatPrice(m.strikePrice)} @ {m.maturity.toLocaleDateString()} - (${formatPrice(m.prices.long)} / ${formatPrice(m.prices.short)})
+                        {m.phase === 'Bidding' ? <PlayArrowIcon /> : (m.phase === 'Trading' ? <LoopIcon /> : <StopIcon />)} {m.phase}: {m.currency} &gt; ${formatPrice(m.strikePrice)} @ {m.maturity.toLocaleDateString()} - (${formatPrice(m.prices.long)} / ${formatPrice(m.prices.short)})
                       </ListItemText>
                      </ListItem>)) }
                   { markets.length === 0 && <ListItem>No markets!</ListItem> }
