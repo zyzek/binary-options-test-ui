@@ -158,9 +158,9 @@ export function bid(marketAddress, short, value) {
       bids: { long: ownLongBids, short: ownShortBids },
       totalBids: { long: longBids, short: shortBids },
       claimable: { long: ownLongClaimable, short: ownShortClaimable },
-      deposits: Web3Utils.fromWei(deposits.toString()),
+      deposits: Web3Utils.fromWei(deposits.toString(10)),
       prices: { long: longPrice, short: shortPrice },
-      sUSDBalance: Web3Utils.fromWei(sUSDBalance.toString()),
+      sUSDBalance: Web3Utils.fromWei(sUSDBalance.toString(10)),
       sufficientAllowance: sufficientAllowance ? 'Yes' : 'No'
     }
   }
@@ -195,9 +195,9 @@ export function refund(marketAddress, short, value) {
       bids: { long: ownLongBids, short: ownShortBids },
       totalBids: { long: longBids, short: shortBids },
       claimable: { long: ownLongClaimable, short: ownShortClaimable },
-      deposits: Web3Utils.fromWei(deposits.toString()),
+      deposits: Web3Utils.fromWei(deposits.toString(10)),
       prices: { long: longPrice, short: shortPrice },
-      sUSDBalance: Web3Utils.fromWei(sUSDBalance.toString()),
+      sUSDBalance: Web3Utils.fromWei(sUSDBalance.toString(10)),
       sufficientAllowance: sufficientAllowance ? 'Yes' : 'No'
     }
   }
@@ -225,11 +225,11 @@ export function getMarkets(matured = false) {
       return {
         address: m,
         currency: Web3Utils.hexToAscii(oracleDetails[0]),
-        strikePrice: Web3Utils.fromWei(oracleDetails[1].toString()),
+        strikePrice: Web3Utils.fromWei(oracleDetails[1].toString(10)),
         phase,
-        biddingEnd: new Date(parseInt(times[0].toString()) * 1000),
-        maturity: new Date(parseInt(times[1].toString()) * 1000),
-        expiry: new Date(parseInt(times[2].toString()) * 1000)
+        biddingEnd: new Date(parseInt(times[0].toString(10)) * 1000),
+        maturity: new Date(parseInt(times[1].toString(10)) * 1000),
+        expiry: new Date(parseInt(times[2].toString(10)) * 1000)
       }
     })
 
@@ -322,16 +322,16 @@ export function getMarketInfo(marketAddress) {
     return {
       type: constants.UPDATE_MARKET_INFO,
       currency: Web3Utils.hexToAscii(oracleKey),
-      strikePrice: Web3Utils.fromWei(strikePrice.toString()),
-      currentPrice: Web3Utils.fromWei(finalPrice.toString()) !== '0' ? Web3Utils.fromWei(finalPrice.toString()) : Web3Utils.fromWei(oraclePrice.toString()),
+      strikePrice: Web3Utils.fromWei(strikePrice.toString(10)),
+      currentPrice: Web3Utils.fromWei(finalPrice.toString(10)) !== '0' ? Web3Utils.fromWei(finalPrice.toString()) : Web3Utils.fromWei(oraclePrice.toString(10)),
       phase,
       times: {
-        biddingEnd: new Date(parseInt(biddingEnd.toString()) * 1000),
-        maturity: new Date(parseInt(maturity.toString()) * 1000),
-        expiry: new Date(parseInt(expiry.toString()) * 1000)
+        biddingEnd: new Date(parseInt(biddingEnd.toString(10)) * 1000),
+        maturity: new Date(parseInt(maturity.toString(10)) * 1000),
+        expiry: new Date(parseInt(expiry.toString(10)) * 1000)
       },
       prices: { long: longPrice, short: shortPrice },
-      deposits: Web3Utils.fromWei(deposits.toString()),
+      deposits: Web3Utils.fromWei(deposits.toString(10)),
       result,
       bids: { long: ownLongBids, short: ownShortBids },
       totalBids: { long: longBids, short: shortBids },
@@ -339,7 +339,7 @@ export function getMarketInfo(marketAddress) {
       balances: { long: ownLongOptions, short: ownShortOptions },
       totalSupplies: { long: longOptions, short: shortOptions },
       sufficientAllowance: sufficientAllowance ? 'Yes' : 'No',
-      sUSDBalance: Web3Utils.fromWei(sUSDBalance.toString())
+      sUSDBalance: Web3Utils.fromWei(sUSDBalance.toString(10))
     }
   }
 }
