@@ -5,6 +5,9 @@ import BinaryOptionMarketManager from '../../../contracts/BinaryOptionMarketMana
 import IERC20 from '../../../contracts/IERC20.json'
 import Web3Utils from 'web3-utils'
 
+const MANAGER_ADDRESS = '0x9492eac3c8c6F1E768C71Fa2eAf04FB2F42104eC'
+const SUSD_ADDRESS = '0x8E20577D62D3Eab7BA9aC1b5e480d85B1A4B1D33'
+
 export function claimOptions(marketAddress) {
   return async (dispatch, getState) => {
     const { web3Provider } = getState().provider
@@ -109,7 +112,7 @@ export function approveToMax(marketAddress) {
     const ERC20ContractConstructor = contract(IERC20)
     ERC20ContractConstructor.setProvider(web3Provider.currentProvider)
     ERC20ContractConstructor.defaults({ from: web3Provider.eth.defaultAccount })
-    const sUSD = ERC20ContractConstructor.at('0x8E20577D62D3Eab7BA9aC1b5e480d85B1A4B1D33')
+    const sUSD = ERC20ContractConstructor.at(SUSD_ADDRESS)
     const maxInt = `0x${'f'.repeat(64)}`
     await sUSD.approve(marketAddress, maxInt, { from: account })
     const balance = await sUSD.balanceOf(account)
@@ -123,7 +126,7 @@ export function approveToMax(marketAddress) {
 }
 
 export async function approveManagerToMax() {
-  return approveToMax('0xA07681a27Dd4Db2b60aAc1fB6068aC3E787CB2E7')
+  return approveToMax(MANAGER_ADDRESS)
 }
 
 export function bid(marketAddress, short, value) {
@@ -137,7 +140,7 @@ export function bid(marketAddress, short, value) {
     const ERC20ContractConstructor = contract(IERC20)
     ERC20ContractConstructor.setProvider(web3Provider.currentProvider)
     ERC20ContractConstructor.defaults({ from: web3Provider.eth.defaultAccount })
-    const sUSD = ERC20ContractConstructor.at('0x8E20577D62D3Eab7BA9aC1b5e480d85B1A4B1D33')
+    const sUSD = ERC20ContractConstructor.at(SUSD_ADDRESS)
 
     const tx = await BOMContract.bid(short ? 1 : 0, Web3Utils.toWei(value), { from: account })
 
@@ -178,7 +181,7 @@ export function refund(marketAddress, short, value) {
     const ERC20ContractConstructor = contract(IERC20)
     ERC20ContractConstructor.setProvider(web3Provider.currentProvider)
     ERC20ContractConstructor.defaults({ from: web3Provider.eth.defaultAccount })
-    const sUSD = ERC20ContractConstructor.at('0x8E20577D62D3Eab7BA9aC1b5e480d85B1A4B1D33')
+    const sUSD = ERC20ContractConstructor.at(SUSD_ADDRESS)
 
     await BOMContract.refund(short ? 1 : 0, Web3Utils.toWei(value), { from: account })
     const [ownLongBids, ownShortBids] = await BOMContract.bidsOf(account)
@@ -208,7 +211,7 @@ export function getMarkets(matured = false) {
     const { web3Provider } = getState().provider
     const ManagerContractConstructor = contract(BinaryOptionMarketManager)
     ManagerContractConstructor.setProvider(web3Provider.currentProvider)
-    const ManagerContract = ManagerContractConstructor.at('0xA07681a27Dd4Db2b60aAc1fB6068aC3E787CB2E7')
+    const ManagerContract = ManagerContractConstructor.at(MANAGER_ADDRESS)
 
     const BOMContractConstructor = contract(BinaryOptionMarket)
     BOMContractConstructor.setProvider(web3Provider.currentProvider)
@@ -249,7 +252,7 @@ export function createMarket(currency, strikePrice, biddingEnd, maturity, longBi
     const account = web3Provider.eth.accounts[0]
     const ManagerContractConstructor = contract(BinaryOptionMarketManager)
     ManagerContractConstructor.setProvider(web3Provider.currentProvider)
-    const ManagerContract = ManagerContractConstructor.at('0xA07681a27Dd4Db2b60aAc1fB6068aC3E787CB2E7')
+    const ManagerContract = ManagerContractConstructor.at(MANAGER_ADDRESS)
 
     const BOMContractConstructor = contract(BinaryOptionMarket)
     BOMContractConstructor.setProvider(web3Provider.currentProvider)
@@ -296,7 +299,7 @@ export function getMarketInfo(marketAddress) {
     const ERC20ContractConstructor = contract(IERC20)
     ERC20ContractConstructor.setProvider(web3Provider.currentProvider)
     ERC20ContractConstructor.defaults({ from: web3Provider.eth.defaultAccount })
-    const sUSD = ERC20ContractConstructor.at('0x8E20577D62D3Eab7BA9aC1b5e480d85B1A4B1D33')
+    const sUSD = ERC20ContractConstructor.at(SUSD_ADDRESS)
 
     const phase = mapPhaseString((await BOMContract.phase()).toString())
 
