@@ -125,7 +125,7 @@ export function approveToMax(marketAddress) {
   }
 }
 
-export async function approveManagerToMax() {
+export function approveManagerToMax() {
   return approveToMax(MANAGER_ADDRESS)
 }
 
